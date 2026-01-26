@@ -1,9 +1,38 @@
 spring:
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   application:
     name: email
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: user
-    password: password
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USER}
+    password: ${RABBIT_PASS}
     virtual-host: /
+rabbit:
+  host: ${RABBIT_HOST}
+  port: ${RABBIT_PORT}
+  user: ${RABBIT_USER}
+  pass: ${RABBIT_PASS}
+
+  email-queue: ${EMAIL_QUEUE}
+  email-retry-queue: ${EMAIL_RETRY_QUEUE}
+  email-dlq: ${EMAIL_DLQ}
+
+  email-exchange: ${EMAIL_EXCHANGE}
+  email-retry-exchange: ${EMAIL_RETRY_EXCHANGE}
+  email-dlx: ${EMAIL_DLX}
+
+  email-routing-key: ${EMAIL_ROUTING_KEY}
+  email-retry-routing-key: ${EMAIL_RETRY_ROUTING_KEY}
+  email-dlq-routing-key: ${EMAIL_DLQ_ROUTING_KEY}
