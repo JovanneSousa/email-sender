@@ -1,6 +1,7 @@
 package com.jovanne.email.consumer;
 
 import com.jovanne.email.domain.EmailEvent;
+import com.jovanne.email.services.EmailLogService;
 import com.jovanne.email.services.EmailService;
 import com.rabbitmq.client.Channel;
 import lombok.RequiredArgsConstructor;

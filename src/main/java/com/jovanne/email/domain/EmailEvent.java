@@ -1,10 +1,8 @@
 package com.jovanne.email.domain;
 
-import com.jovanne.email.EmailType;
+import com.jovanne.email.enums.EmailType;
 
-import java.time.Instant;
 import java.util.Map;
-import java.util.UUID;
 
 public record EmailEvent(
         String eventId,

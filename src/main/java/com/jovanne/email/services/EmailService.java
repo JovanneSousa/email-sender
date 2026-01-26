@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EmailService implements IEmailService{
     private final JavaMailSender mailSender;
+    private final EmailLogService emailLogService;
 
     @Override
     public void send(EmailEvent event) {
@@ -27,12 +28,14 @@ public class EmailService implements IEmailService{
                     "Email enviado com sucesso | eventId={} | to={}",
                     event.eventId(), event.to()
             );
+            emailLogService.logSuccess(event, 1);
         } catch (Exception ex) {
             log.error(
                     "Falha ao enviar email | eventId={} | to={}",
                     event.eventId(), event.to()
             );
 
+            emailLogService.logFailure(event, 3, ex);
             throw new EmailSendException("Erro ao enviar email", ex);
         }
     }

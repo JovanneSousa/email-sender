@@ -1,4 +1,4 @@
-package com.jovanne.email;
+package com.jovanne.email.enums;
 
 public enum EmailType {
     WELCOME,
