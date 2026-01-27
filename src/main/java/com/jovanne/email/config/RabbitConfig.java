@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,11 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     private final RabbitProperties props;
+
+    @Bean
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+        return new RabbitAdmin(connectionFactory);
+    }
 
     @Bean
     TopicExchange emailExchange() {
@@ -71,7 +77,7 @@ public class RabbitConfig {
     Binding emailDqlBinding() {
         return BindingBuilder
                 .bind(emailDlq())
-                .to(emailExchange())
+                .to(emailDlqExchange())
                 .with(props.getEmailDlqRoutingKey());
     }
 
