@@ -51,3 +51,5 @@ rabbit:
   email-routing-key: ${EMAIL_ROUTING_KEY}
   email-retry-routing-key: ${EMAIL_RETRY_ROUTING_KEY}
   email-dlq-routing-key: ${EMAIL_DLQ_ROUTING_KEY}
+server:
+  port: 8080
