@@ -31,7 +31,9 @@ spring:
     port: ${RABBIT_PORT}
     username: ${RABBIT_USER}
     password: ${RABBIT_PASS}
-    virtual-host: /
+    virtual-host: ${RABBIT_VH}
+    ssl:
+      enabled: true
 rabbit:
   host: ${RABBIT_HOST}
   port: ${RABBIT_PORT}
