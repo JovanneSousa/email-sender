@@ -8,8 +8,8 @@ FROM eclipse-temurin:25-jdk-alpine
 
 WORKDIR /app
 
-COPY target/email-sender.jar ./email-sender.jar
+COPY target/email.jar ./email.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "email-sender.jar"]
+ENTRYPOINT ["java", "-jar", "email.jar"]
