@@ -55,4 +55,5 @@ server:
   port: 8080
 resend:
   api:
+    domain: ${DOMAIN_USER}
     key: ${API_KEY}

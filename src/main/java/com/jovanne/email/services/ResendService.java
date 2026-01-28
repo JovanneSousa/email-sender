@@ -10,7 +10,11 @@ import reactor.core.publisher.Mono;
 @Service
 public class ResendService {
     private final WebClient client;
-    public ResendService(@Value("${resend.api.key}") String apiKey) {
+    private final String fromDomain;
+    public ResendService(
+            @Value("${resend.api.key}") String apiKey,
+             @Value("${resend.api.domain}") String fromDomain) {
+        this.fromDomain = fromDomain;
         this.client = WebClient.builder()
                 .baseUrl("https://api.resend.com")
                 .defaultHeader("Authorization", "Bearer " + apiKey)
@@ -22,7 +26,7 @@ public class ResendService {
                 .uri("/emails")
                 .bodyValue(
                         new ResendEmailRequestDTO(
-                                "${MAIL_USERNAME}",
+                                fromDomain,
                                 event.to(),
                                 event.subject(),
                                 event.body())
