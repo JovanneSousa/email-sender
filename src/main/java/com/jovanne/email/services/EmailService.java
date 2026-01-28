@@ -15,28 +15,23 @@ import org.thymeleaf.context.Context;
 @Service
 @RequiredArgsConstructor
 public class EmailService implements IEmailService{
-    private final JavaMailSender mailSender;
+    private final ResendService mailSender;
     private final EmailLogService emailLogService;
     private final TemplateEngine templateEngine;
 
     @Override
     public void send(EmailEvent event) {
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true,"UTF-8");
 
             Context context = new Context();
             context.setVariable("subject", event.subject());
             context.setVariable("name", event.type());
             context.setVariable("message", event.body());
 
-            String htmlContent = templateEngine.process("EmailTemplate.html", context);
+            String htmlContent =
+                    templateEngine.process("EmailTemplate.html", context);
 
-            messageHelper.setTo(event.to());
-            messageHelper.setSubject(event.subject());
-            messageHelper.setText(htmlContent, true);
-
-            mailSender.send(message);
+            mailSender.sendEmail(event);
             log.info(
                     "Email enviado com sucesso | eventId={} | to={}",
                     event.eventId(), event.to()
