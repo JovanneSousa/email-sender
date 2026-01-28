@@ -49,7 +49,6 @@ public class EmailService implements IEmailService{
             );
 
             emailLogService.logFailure(event, 3, ex);
-            throw new EmailSendException("Erro ao enviar email", ex);
         }
     }
 }
