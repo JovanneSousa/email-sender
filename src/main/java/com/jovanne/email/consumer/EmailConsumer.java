@@ -26,7 +26,7 @@ public class EmailConsumer {
             Channel channel)throws IOException {
         int retryCount = (int) message.getMessageProperties()
                 .getHeaders()
-                .getOrDefault("x-retry-count", 0);
+                .getOrDefault("x-retry-count", 0) + 1;
 
         try {
             service.sendEmail(event, retryCount);
