@@ -1,48 +1,24 @@
 package com.jovanne.email.services;
 
 import com.jovanne.email.domain.EmailEvent;
-import com.jovanne.email.exceptions.EmailSendException;
-import jakarta.mail.internet.MimeMessage;
+import com.jovanne.email.repositories.IEmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmailService implements IEmailService{
+public class EmailService implements IEmailService {
     private final ResendService mailSender;
     private final EmailLogService emailLogService;
-    private final TemplateEngine templateEngine;
 
     @Override
     public void send(EmailEvent event) {
         try {
-
-            Context context = new Context();
-            context.setVariable("subject", event.subject());
-            context.setVariable("name", event.type());
-            context.setVariable("message", event.body());
-
-            String htmlContent =
-                    templateEngine.process("EmailTemplate.html", context);
-
-            mailSender.sendEmail(event);
-            log.info(
-                    "Email enviado com sucesso | eventId={} | to={}",
-                    event.eventId(), event.to()
-            );
-            emailLogService.logSuccess(event, 1);
+//            mailSender.sendEmail(event);
         } catch (Exception ex) {
-            log.error(
-                    "Falha ao enviar email | eventId={} | to={}",
-                    event.eventId(), event.to()
-            );
-
             emailLogService.logFailure(event, 3, ex);
         }
     }

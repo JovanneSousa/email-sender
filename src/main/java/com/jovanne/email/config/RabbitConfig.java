@@ -5,6 +5,7 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -82,7 +83,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    public JacksonJsonMessageConverter jackson2JsonMessageConverter() {
+    public MessageConverter jackson2JsonMessageConverter() {
         return new JacksonJsonMessageConverter();
     }
 

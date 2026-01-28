@@ -3,6 +3,7 @@ package com.jovanne.email.consumer;
 import com.jovanne.email.domain.EmailEvent;
 import com.jovanne.email.services.EmailLogService;
 import com.jovanne.email.services.EmailService;
+import com.jovanne.email.services.ResendService;
 import com.rabbitmq.client.Channel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class EmailConsumer {
-    private final EmailService emailService;
+    private final ResendService service;
 
     @RabbitListener(queues = "${rabbit.email-queue}", containerFactory = "manualAckContainerFactory")
     public void consume(
@@ -27,21 +28,11 @@ public class EmailConsumer {
                 .getHeaders()
                 .getOrDefault("x-retry-count", 0);
 
-        log.info(
-                "Processando email | eventId={} | tentativa={}",
-                event.eventId(), retryCount + 1
-        );
-
         try {
-            emailService.send(event);
+            service.sendEmail(event, retryCount);
 
             channel.basicAck(
                     message.getMessageProperties().getDeliveryTag(), false
-            );
-
-            log.info(
-                    "Email enviado com sucesso | eventId={}",
-                    event.eventId()
             );
         } catch (Exception ex) {
             log.error(

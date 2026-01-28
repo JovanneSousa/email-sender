@@ -1,4 +1,4 @@
-package com.jovanne.email.services;
+package com.jovanne.email.repositories;
 
 import com.jovanne.email.domain.EmailEvent;
 

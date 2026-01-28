@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
 
 @Service
@@ -35,7 +36,7 @@ public class EmailLogService {
                 emailStatus,
                 attempt,
                 errorMessage,
-                LocalDateTime.now());
+                LocalDateTime.now(ZoneId.of("GMT-4")));
         repository.save(log);
     }
 
