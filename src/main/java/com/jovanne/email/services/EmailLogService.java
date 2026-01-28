@@ -23,6 +23,10 @@ public class EmailLogService {
         save(event, EmailStatus.FAILED, attempt, ex.getMessage());
     }
 
+    public void logFailure(EmailEvent event, String error) {
+        save(event, EmailStatus.FAILED, 1, error);
+    }
+
     private void save(EmailEvent event, EmailStatus emailStatus, int attempt, String errorMessage) {
         EmailSendLog log = new EmailSendLog(
                 event.eventId(),
