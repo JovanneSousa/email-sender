@@ -1,7 +1,6 @@
 package com.jovanne.email.domain;
 
 import com.jovanne.email.enums.EmailType;
-
 import java.util.Map;
 
 public record EmailEvent(

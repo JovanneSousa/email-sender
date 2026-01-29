@@ -53,3 +53,7 @@ rabbit:
   email-dlq-routing-key: ${EMAIL_DLQ_ROUTING_KEY}
 server:
   port: 8080
+resend:
+  api:
+    domain: ${DOMAIN_USER}
+    key: ${API_KEY}
