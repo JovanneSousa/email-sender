@@ -41,12 +41,11 @@ public class ResendService implements IEmailService {
 
         try {
             CreateEmailResponse data = resend.emails().send(params);
-            emailLogService.logSuccess(event, attempt);
+            emailLogService.logSuccess(event, attempt, data.getId());
             log.info(
-                    "Email enviado com sucesso | eventId={} | to={}",
-                    event.eventId(), event.to()
+                    "Email enviado com sucesso | eventId={} | to={} | resendId={}",
+                    event.eventId(), event.to(), data.getId()
             );
-            System.out.println(data.toString());
         } catch (ResendException e) {
             emailLogService.logFailure(event, attempt, e);
             log.error(

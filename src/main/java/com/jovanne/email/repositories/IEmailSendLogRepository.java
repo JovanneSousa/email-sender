@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface IEmailSendLogRepository extends JpaRepository<EmailSendLog, UUID> {
+    public EmailSendLog getByResendId(String resendId);
 }
