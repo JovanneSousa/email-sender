@@ -34,6 +34,8 @@ public class EmailSendLog {
 
     private LocalDateTime createdAt;
 
+    public String resendId;
+
     public  EmailSendLog(
             String event,
             String to,
@@ -41,7 +43,8 @@ public class EmailSendLog {
             EmailStatus emailStatus,
             Integer tentativa,
             String error,
-            LocalDateTime dataCriacao) {
+            LocalDateTime dataCriacao,
+            String resendId) {
         eventId = event;
         toEmail = to;
         subject = corpo;
@@ -49,6 +52,7 @@ public class EmailSendLog {
         attempt = tentativa;
         errorMessage = error;
         createdAt = dataCriacao;
+        this.resendId = resendId;
     }
 
 }
