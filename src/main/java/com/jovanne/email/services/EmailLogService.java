@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +38,4 @@ public class EmailLogService {
                 LocalDateTime.now(ZoneId.of("GMT-4")));
         repository.save(log);
     }
-
 }
