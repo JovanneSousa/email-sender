@@ -5,6 +5,7 @@ import com.jovanne.email.domain.EmailSendLog;
 import com.jovanne.email.dtos.ResendWebhookEvent;
 import com.jovanne.email.enums.EmailStatus;
 import com.jovanne.email.repositories.IEmailSendLogRepository;
+import com.resend.services.emails.model.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,29 +34,25 @@ public class EmailLogService {
         save(event, EmailStatus.FAILED, attempt, ex.getMessage());
     }
 
-    public void markDelivered (ResendWebhookEvent event) {
-        updateStatus(EmailStatus.DELIVERED, event);
-    }
-
-    public void markFailed (ResendWebhookEvent event) {
-        updateStatus(EmailStatus.FAILED, event);
-    }
-
-    public void markComplained (ResendWebhookEvent event) {
-        updateStatus(EmailStatus.COMPLAINED, event);
-    }
-
-    private void updateStatus(EmailStatus status, ResendWebhookEvent event) {
+    public boolean updateStatus(ResendWebhookEvent event) {
         EmailSendLog logBanco = repository.getByResendId(event.getData().getEmail_id());
         if (logBanco == null) {
             log.warn("Email log não encontrado para resendId={}", event.getData().getEmail_id());
-            return;
+            return false;
         }
-        logBanco.setStatus(status);
+
+        switch (event.getType()) {
+            case "email.delivered" -> logBanco.setStatus(EmailStatus.DELIVERED);
+            case "email.bounced" -> logBanco.setStatus(EmailStatus.FAILED);
+            case "email.complained" -> logBanco.setStatus(EmailStatus.COMPLAINED);
+        }
+
         if (event.getData().getReason() != null) {
             logBanco.setErrorMessage(event.getData().getReason());
         }
+
         repository.save(logBanco);
+        return true;
     }
 
     private void save(EmailEvent event, EmailStatus emailStatus, int attempt, String errorMessage, String resendId) {

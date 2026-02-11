@@ -18,11 +18,9 @@ public class ResendWebhookController {
 
     @PostMapping
     public ResponseEntity<Void> handleWebhook(@RequestBody ResendWebhookEvent event) {
-        switch (event.getType()) {
-            case "email.delivered" -> emailLogService.markDelivered(event);
-            case "email.bounced" -> emailLogService.markFailed(event);
-            case "email.complained" -> emailLogService.markComplained(event);
-        }
+        var result = emailLogService.updateStatus(event);
+        if(!result) return ResponseEntity.badRequest().build();
+
         return ResponseEntity.ok().build();
     }
 }
