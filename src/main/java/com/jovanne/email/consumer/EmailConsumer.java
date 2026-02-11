@@ -4,7 +4,6 @@ import com.jovanne.email.domain.EmailEvent;
 import com.jovanne.email.services.IEmailService;
 import com.rabbitmq.client.Channel;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

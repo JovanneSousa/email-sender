@@ -46,9 +46,9 @@ public class EmailLogService {
     }
 
     private void updateStatus(EmailStatus status, ResendWebhookEvent event) {
-        EmailSendLog logBanco = repository.getByResendId(event.getData().getId());
+        EmailSendLog logBanco = repository.getByResendId(event.getData().getEmail_id());
         if (logBanco == null) {
-            log.warn("Email log não encontrado para resendId={}", event.getData().getId());
+            log.warn("Email log não encontrado para resendId={}", event.getData().getEmail_id());
             return;
         }
         logBanco.setStatus(status);

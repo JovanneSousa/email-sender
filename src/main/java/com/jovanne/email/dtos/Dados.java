@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Dados {
-    String id;
+    String email_id;
     String bounce_type;
     String reason;
 }
