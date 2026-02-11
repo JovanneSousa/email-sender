@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "email")
 public class EmailController {
 
-    @GetMapping("hello")
-    public ResponseEntity<String> helloWorld() {
-        return ResponseEntity.ok("Hello World");
+    @GetMapping("health")
+    public ResponseEntity wakeUp() {
+        return ResponseEntity.ok().build();
     }
 }
