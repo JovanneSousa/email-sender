@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -24,9 +25,14 @@ public class EmailConsumer {
             Message message,
             Channel channel)throws IOException {
 
-        int retryCount = (int) message.getMessageProperties()
-                .getHeaders()
-                .getOrDefault("x-retry-count", 0);
+        int retryCount = Optional.ofNullable(
+                        message.getMessageProperties()
+                                .getHeaders()
+                                .get("x-retry-count"))
+                .filter(Number.class::isInstance)
+                .map(Number.class::cast)
+                .map(Number::intValue)
+                .orElse(0);
 
         try {
             service.send(event, retryCount);

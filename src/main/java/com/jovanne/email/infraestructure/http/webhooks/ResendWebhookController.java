@@ -3,7 +3,6 @@ package com.jovanne.email.infraestructure.http.webhooks;
 import com.jovanne.email.application.dtos.ResendWebhookEvent;
 import com.jovanne.email.application.services.EmailLogService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/webhooks/resend")
 @RequiredArgsConstructor
 public class ResendWebhookController {
-
-    @Autowired
-    EmailLogService emailLogService;
+    private final EmailLogService emailLogService;
 
     @PostMapping
     public ResponseEntity<?> handleWebhook(@RequestBody ResendWebhookEvent event) {
