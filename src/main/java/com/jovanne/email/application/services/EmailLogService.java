@@ -4,7 +4,7 @@ import com.jovanne.email.application.dtos.ResendWebhookEvent;
 import com.jovanne.email.domain.entities.EmailEvent;
 import com.jovanne.email.domain.entities.EmailSendLog;
 import com.jovanne.email.domain.enums.EmailStatus;
-import com.jovanne.email.infraestructure.data.repositories.IEmailSendLogRepository;
+import com.jovanne.email.domain.interfaces.IEmailLogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.time.ZoneId;
 @Service
 @RequiredArgsConstructor
 public class EmailLogService {
-    private final IEmailSendLogRepository repository;
+    private final IEmailLogRepository repository;
 
     //Salva logs sucesso de emails Resend
     public void logSuccess(EmailEvent event, int attempt, String resendId) {
@@ -34,20 +34,21 @@ public class EmailLogService {
     }
 
     public boolean updateStatus(ResendWebhookEvent event) {
-        EmailSendLog logBanco = repository.getByResendId(event.getData().getEmail_id());
-        if (logBanco == null) {
-            log.warn("Email log não encontrado para resendId={}", event.getData().getEmail_id());
+        var logBancoOptional = repository.getByResendId(event.data().email_id());
+        if (logBancoOptional.isEmpty()) {
+            log.warn("Email log não encontrado para resendId={}", event.data().email_id());
             return false;
         }
 
-        switch (event.getType()) {
+        var logBanco = logBancoOptional.get();
+        switch (event.type()) {
             case "email.delivered" -> logBanco.setStatus(EmailStatus.DELIVERED);
             case "email.bounced" -> logBanco.setStatus(EmailStatus.FAILED);
             case "email.complained" -> logBanco.setStatus(EmailStatus.COMPLAINED);
         }
 
-        if (event.getData().getReason() != null) {
-            logBanco.setErrorMessage(event.getData().getReason());
+        if (event.data().reason() != null) {
+            logBanco.setErrorMessage(event.data().reason());
         }
 
         repository.save(logBanco);
