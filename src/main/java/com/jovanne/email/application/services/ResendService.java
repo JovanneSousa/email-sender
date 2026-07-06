@@ -1,6 +1,7 @@
-package com.jovanne.email.services;
+package com.jovanne.email.application.services;
 
-import com.jovanne.email.domain.EmailEvent;
+import com.jovanne.email.domain.entities.EmailEvent;
+import com.jovanne.email.domain.interfaces.IEmailService;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;

@@ -1,11 +1,10 @@
-package com.jovanne.email.services;
+package com.jovanne.email.application.services;
 
-import com.jovanne.email.domain.EmailEvent;
-import com.jovanne.email.domain.EmailSendLog;
-import com.jovanne.email.dtos.ResendWebhookEvent;
-import com.jovanne.email.enums.EmailStatus;
-import com.jovanne.email.repositories.IEmailSendLogRepository;
-import com.resend.services.emails.model.Email;
+import com.jovanne.email.application.dtos.ResendWebhookEvent;
+import com.jovanne.email.domain.entities.EmailEvent;
+import com.jovanne.email.domain.entities.EmailSendLog;
+import com.jovanne.email.domain.enums.EmailStatus;
+import com.jovanne.email.infraestructure.data.repositories.IEmailSendLogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

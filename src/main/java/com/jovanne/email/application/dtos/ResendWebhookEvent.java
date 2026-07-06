@@ -1,4 +1,4 @@
-package com.jovanne.email.dtos;
+package com.jovanne.email.application.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

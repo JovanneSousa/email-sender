@@ -1,7 +1,7 @@
-package com.jovanne.email.controllers;
+package com.jovanne.email.infraestructure.http.webhooks;
 
-import com.jovanne.email.dtos.ResendWebhookEvent;
-import com.jovanne.email.services.EmailLogService;
+import com.jovanne.email.application.dtos.ResendWebhookEvent;
+import com.jovanne.email.application.services.EmailLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

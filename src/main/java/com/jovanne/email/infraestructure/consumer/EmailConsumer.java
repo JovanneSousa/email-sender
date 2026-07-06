@@ -1,7 +1,7 @@
-package com.jovanne.email.consumer;
+package com.jovanne.email.infraestructure.consumer;
 
-import com.jovanne.email.domain.EmailEvent;
-import com.jovanne.email.services.IEmailService;
+import com.jovanne.email.domain.entities.EmailEvent;
+import com.jovanne.email.domain.interfaces.IEmailService;
 import com.rabbitmq.client.Channel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.Message;

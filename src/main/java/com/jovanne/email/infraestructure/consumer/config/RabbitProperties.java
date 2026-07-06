@@ -1,4 +1,4 @@
-package com.jovanne.email.config;
+package com.jovanne.email.infraestructure.consumer.config;
 
 import lombok.Getter;
 import lombok.Setter;

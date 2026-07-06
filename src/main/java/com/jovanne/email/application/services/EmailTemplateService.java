@@ -1,6 +1,6 @@
-package com.jovanne.email.services;
+package com.jovanne.email.application.services;
 
-import com.jovanne.email.domain.EmailEvent;
+import com.jovanne.email.domain.entities.EmailEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;

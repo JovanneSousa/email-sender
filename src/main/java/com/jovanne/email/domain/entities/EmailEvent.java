@@ -1,6 +1,6 @@
-package com.jovanne.email.domain;
+package com.jovanne.email.domain.entities;
 
-import com.jovanne.email.enums.EmailType;
+import com.jovanne.email.domain.enums.EmailType;
 import java.util.Map;
 
 public record EmailEvent(

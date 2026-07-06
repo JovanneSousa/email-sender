@@ -1,4 +1,4 @@
-package com.jovanne.email.controllers;
+package com.jovanne.email.infraestructure.http.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.jovanne.email.enums;
+package com.jovanne.email.domain.enums;
 
 public enum EmailStatus {
     SUCCESS,

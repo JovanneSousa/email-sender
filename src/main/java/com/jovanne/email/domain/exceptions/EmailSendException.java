@@ -1,4 +1,4 @@
-package com.jovanne.email.exceptions;
+package com.jovanne.email.domain.exceptions;
 
 public class EmailSendException extends RuntimeException {
     public EmailSendException() {

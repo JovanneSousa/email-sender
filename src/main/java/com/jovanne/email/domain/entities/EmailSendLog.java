@@ -1,8 +1,7 @@
-package com.jovanne.email.domain;
+package com.jovanne.email.domain.entities;
 
-import com.jovanne.email.enums.EmailStatus;
+import com.jovanne.email.domain.enums.EmailStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
